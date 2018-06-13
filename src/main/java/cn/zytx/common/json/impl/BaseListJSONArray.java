@@ -10,6 +10,7 @@ import java.math.BigInteger;
 import java.util.*;
 
 /**
+ * 基于List的JSONArray实现基类
  * @author xiongshiyan at 2018/6/11
  */
 public abstract class BaseListJSONArray extends BaseJson<BaseListJSONArray> implements JsonArray {

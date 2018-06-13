@@ -1,9 +1,7 @@
 package cn.zytx.common.json.impl;
 
-import cn.zytx.common.json.Json;
 import cn.zytx.common.json.JsonArray;
 import cn.zytx.common.json.JsonObject;
-import com.google.gson.Gson;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -13,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * 基于Map的JSONObject实现
+ * 基于Map的JSONObject实现基类
  * @author xiongshiyan at 2018/6/13
  */
 public abstract class BaseMapJSONObject extends BaseJson<BaseMapJSONObject> implements JsonObject{
