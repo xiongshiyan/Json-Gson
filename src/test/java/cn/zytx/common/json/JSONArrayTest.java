@@ -160,4 +160,10 @@ public class JSONArrayTest {
         jsonArray.put(jsonObject);
         Assert.assertEquals("[{\"k1\":\"v1\",\"k2\":\"v2\"}]" , jsonArray.toString());
     }
+    @Test
+    public void testFromList() throws Exception {
+        List<Object> list = Arrays.asList("12","21",12);
+        JsonArray array = jsonArray.fromList(list);
+        Assert.assertEquals("[\"12\",\"21\",12]" , array.toString());
+    }
 }

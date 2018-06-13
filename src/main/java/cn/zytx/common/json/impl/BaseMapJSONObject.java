@@ -307,11 +307,6 @@ public abstract class BaseMapJSONObject extends BaseJson<BaseMapJSONObject> impl
     }
 
     @Override
-    public JsonObject fromMap(Map<String, Object> map) {
-        return new JSONObject(map);
-    }
-
-    @Override
     public int hashCode() {
         return map.hashCode();
     }

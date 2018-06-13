@@ -57,4 +57,9 @@ public class JSONObject extends BaseMapJSONObject {
 
         return new Gson().toJson(this.map , Map.class);
     }
+
+    @Override
+    public JsonObject fromMap(Map<String, Object> map) {
+        return new JSONObject(map);
+    }
 }

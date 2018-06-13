@@ -43,4 +43,10 @@ public class JSONArray extends BaseListJSONArray {
         }
         return (JsonArray) opt;
     }
+
+    @Override
+    public JsonArray fromList(List<Object> list) {
+        this.list = list;
+        return this;
+    }
 }
