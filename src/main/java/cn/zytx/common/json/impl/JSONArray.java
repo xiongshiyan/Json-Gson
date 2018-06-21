@@ -1,5 +1,6 @@
 package cn.zytx.common.json.impl;
 
+import cn.zytx.common.json.Json;
 import cn.zytx.common.json.JsonArray;
 import cn.zytx.common.json.JsonObject;
 import com.google.gson.Gson;
@@ -23,7 +24,30 @@ public class JSONArray extends BaseListJSONArray {
     public List<Object> str2List(String arrayString) {
         return new Gson().fromJson(arrayString , List.class);
     }
+    @Override
+    public JsonArray parse(String jsonString) {
+        this.list = new Gson().fromJson(jsonString, List.class);
+        return this;
+    }
 
+    @Override
+    public String toString() {
+        //需要针对JsonObject/JsonArray处理
+        Map<Integer , Json> map = new HashMap<>();
+        int size = size();
+        for (int i = 0; i < size; i++) {
+            Object o = list.get(i);
+            if(o instanceof JsonObject || o instanceof JsonArray){
+                map.put(i , (Json) o);
+            }
+        }
+        map.forEach((k,v)->{
+            list.remove((int)k);
+            list.add(k , v.unwrap());
+        });
+
+        return new Gson().toJson(this.list , List.class);
+    }
     @Override
     public JsonObject getJsonObject(int index) {
         assertIndex(index , size());

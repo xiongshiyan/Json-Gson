@@ -6,6 +6,7 @@ import cn.zytx.common.json.JsonObject;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -43,6 +44,34 @@ public class JSONObject extends BaseMapJSONObject {
         return new Gson().fromJson(jsonString , clazz);
     }
 
+    @Override
+    public JsonObject getJsonObject(String key) {
+        assertKey(key);
+        //这里不能使用getJSONObject，因为每一种Json实现不一样，给出的JsonObject类型是不一致的。
+        //这里就是各种JsonObject不能混用的原因
+        Object temp = this.map.get(key);
+        Object t = checkNullValue(key, temp);
+
+        if(t instanceof Map){
+            return new JSONObject((Map<String, Object>) t);
+        }
+
+        return (JsonObject) t;
+    }
+
+    @Override
+    public JsonArray getJsonArray(String key) {
+        assertKey(key);
+        //这里不能使用getJSONObject，因为每一种Json实现不一样，给出的JsonObject类型是不一致的。
+        //这里就是各种JsonObject不能混用的原因
+        Object temp = this.map.get(key);
+        Object t = checkNullValue(key, temp);
+
+        if(t instanceof List){
+            return new JSONArray((List<Object>)t);
+        }
+        return (JsonArray) t;
+    }
     @Override
     public String toString() {
         //需要针对JsonObject/JsonArray处理

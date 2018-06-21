@@ -1,12 +1,10 @@
 package cn.zytx.common.json.impl;
 
-import cn.zytx.common.json.JsonArray;
 import cn.zytx.common.json.JsonObject;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -46,35 +44,6 @@ public abstract class BaseMapJSONObject extends BaseJson<BaseMapJSONObject> impl
         assertKey(key);
         Object temp = map.get(key);
         return null == temp ? defaultObject : temp;
-    }
-
-    @Override
-    public JsonObject getJsonObject(String key) {
-        assertKey(key);
-        //这里不能使用getJSONObject，因为每一种Json实现不一样，给出的JsonObject类型是不一致的。
-        //这里就是各种JsonObject不能混用的原因
-        Object temp = this.map.get(key);
-        Object t = checkNullValue(key, temp);
-
-        if(t instanceof Map){
-            return new JSONObject((Map<String, Object>) t);
-        }
-
-        return (JsonObject) t;
-    }
-
-    @Override
-    public JsonArray getJsonArray(String key) {
-        assertKey(key);
-        //这里不能使用getJSONObject，因为每一种Json实现不一样，给出的JsonObject类型是不一致的。
-        //这里就是各种JsonObject不能混用的原因
-        Object temp = this.map.get(key);
-        Object t = checkNullValue(key, temp);
-
-        if(t instanceof List){
-            return new JSONArray((List<Object>)t);
-        }
-        return (JsonArray) t;
     }
 
     @Override
