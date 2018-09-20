@@ -1,9 +1,12 @@
 package top.jfunc.json.impl;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import top.jfunc.json.Json;
 import top.jfunc.json.JsonArray;
 import top.jfunc.json.JsonObject;
+import top.jfunc.json.impl.top.jfunc.json.policy.FieldExclusionStrategy;
+import top.jfunc.json.impl.top.jfunc.json.policy.FieldNameChangeNamingStrategy;
 
 import java.util.HashMap;
 import java.util.List;
@@ -35,8 +38,15 @@ public class JSONObject extends BaseMapJSONObject {
     }
 
     @Override
-    public String serialize(Object javaBean) {
-        return new Gson().toJson(javaBean);
+    public <T> String serialize(T javaBean, boolean nullHold, String... ignoreFields) {
+        //new GsonBuilder().serializeNulls().setFieldNamingPolicy().addSerializationExclusionStrategy()
+        GsonBuilder gsonBuilder = new GsonBuilder().serializeNulls().setFieldNamingStrategy(new FieldNameChangeNamingStrategy())
+                .addSerializationExclusionStrategy(new FieldExclusionStrategy(ignoreFields));
+
+        if(nullHold){
+            gsonBuilder.serializeNulls().create().toJson(javaBean);
+        }
+        return gsonBuilder.create().toJson(javaBean);
     }
 
     @Override
