@@ -16,6 +16,6 @@ public class FieldNameChangeNamingStrategy implements FieldNamingStrategy {
             return f.getName();
         }
         JsonField annotation = f.getAnnotation(JsonField.class);
-        return annotation.value();
+        return "".equals(annotation.value()) ? f.getName() : annotation.value();
     }
 }
