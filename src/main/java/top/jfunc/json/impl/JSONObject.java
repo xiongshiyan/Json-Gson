@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import top.jfunc.json.Json;
 import top.jfunc.json.JsonArray;
 import top.jfunc.json.JsonObject;
+import top.jfunc.json.strategy.FieldExclusionStrategy;
 import top.jfunc.json.strategy.FieldNameChangeNamingStrategy;
 
 import java.util.HashMap;
@@ -39,11 +40,12 @@ public class JSONObject extends BaseMapJSONObject {
     @Override
     public <T> String serialize(T javaBean, boolean nullHold, String... ignoreFields) {
         //new GsonBuilder().serializeNulls().setFieldNamingPolicy().addSerializationExclusionStrategy()
-        GsonBuilder gsonBuilder = new GsonBuilder().serializeNulls().setFieldNamingStrategy(new FieldNameChangeNamingStrategy())
-                .addSerializationExclusionStrategy(new top.jfunc.json.strategy.FieldExclusionStrategy(ignoreFields));
+        GsonBuilder gsonBuilder = new GsonBuilder()
+                .setFieldNamingStrategy(new FieldNameChangeNamingStrategy())
+                .addSerializationExclusionStrategy(new FieldExclusionStrategy(ignoreFields));
 
         if(nullHold){
-            gsonBuilder.serializeNulls().create().toJson(javaBean);
+            return gsonBuilder.serializeNulls().create().toJson(javaBean);
         }
         return gsonBuilder.create().toJson(javaBean);
     }
