@@ -1,4 +1,4 @@
-package top.jfunc.json.impl.top.jfunc.json.policy;
+package top.jfunc.json.policy;
 
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
