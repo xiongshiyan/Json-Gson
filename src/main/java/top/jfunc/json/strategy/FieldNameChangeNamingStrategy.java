@@ -1,4 +1,4 @@
-package top.jfunc.json.policy;
+package top.jfunc.json.strategy;
 
 import com.google.gson.FieldNamingStrategy;
 import top.jfunc.json.annotation.JsonField;
