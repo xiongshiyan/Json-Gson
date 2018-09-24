@@ -2,13 +2,11 @@ package top.jfunc.json.impl;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import top.jfunc.json.Json;
 import top.jfunc.json.JsonArray;
 import top.jfunc.json.JsonObject;
 import top.jfunc.json.strategy.FieldExclusionStrategy;
 import top.jfunc.json.strategy.FieldNameChangeNamingStrategy;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +27,11 @@ public class JSONObject extends BaseMapJSONObject {
     @Override
     protected Map<String, Object> str2Map(String jsonString) {
         return new Gson().fromJson(jsonString, Map.class);
+    }
+
+    @Override
+    protected String map2Str(Map<String, Object> map) {
+        return new Gson().toJson(map , Map.class);
     }
 
     @Override
@@ -83,21 +86,6 @@ public class JSONObject extends BaseMapJSONObject {
         }
         return (JsonArray) t;
     }
-    @Override
-    public String toString() {
-        //需要针对JsonObject/JsonArray处理
-        Map<String , Json> map = new HashMap<>();
-        for (String key : this.map.keySet()) {
-            Object o = this.map.get(key);
-            if(o instanceof JsonObject || o instanceof JsonArray){
-                map.put(key , (Json) o);
-            }
-        }
-        map.forEach((k , v)-> this.map.put(k , v.unwrap()));
-
-        return new Gson().toJson(this.map , Map.class);
-    }
-
     @Override
     public JsonObject fromMap(Map<String, Object> map) {
         return new JSONObject(map);
