@@ -5,8 +5,8 @@ import com.google.gson.GsonBuilder;
 import top.jfunc.json.Json;
 import top.jfunc.json.JsonArray;
 import top.jfunc.json.JsonObject;
-import top.jfunc.json.impl.top.jfunc.json.policy.FieldExclusionStrategy;
-import top.jfunc.json.impl.top.jfunc.json.policy.FieldNameChangeNamingStrategy;
+import top.jfunc.json.policy.FieldExclusionStrategy;
+import top.jfunc.json.policy.FieldNameChangeNamingStrategy;
 
 import java.util.HashMap;
 import java.util.List;
