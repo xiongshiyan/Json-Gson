@@ -3,9 +3,12 @@ package top.jfunc.json.impl;
 import com.google.gson.Gson;
 import top.jfunc.json.Json;
 import top.jfunc.json.JsonArray;
+import top.jfunc.json.JsonException;
 import top.jfunc.json.JsonObject;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author xiongshiyan at 2018/6/11
@@ -72,5 +75,14 @@ public class JSONArray extends BaseListJSONArray {
     public JsonArray fromList(List<Object> list) {
         this.list = list;
         return this;
+    }
+
+    @Override
+    public Json toJson(Object o) {
+        try {
+            return (Json) o;
+        } catch (Exception e) {
+            throw new JsonException("不能将非Json的对象转换为Json");
+        }
     }
 }
